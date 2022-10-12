@@ -1,0 +1,18 @@
+Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+
+After review Security Hub Findings and Amazon Inspector - Findings I found some thing:
+1. Security groups should not allow unrestricted access to ports with high risk [3389, 20, 23, 110, 143, 3306, 8080, 1433, 9200, 9300, 25, 445, 135, 21, 1434, 4333, 5432, 5500, 5601, 22, 3000, 5000, 8088, 8888] 
+2. S3 Block Public Access setting should be enabled at the bucket-level
+3. Ensure MFA is enabled for the root user
+4. Instance is configured to allow users to log in with root credentials over SSH, without having to use a command authenticated by a public key. This increases the likelihood of a successful brute-force attack.
+5. Process 'sshd' is listening on TCP port 22 which is associated with 'SSH' and is reachable from the internet
+6. Process 'systemd-network' is listening on UDP port 68 which is associated with 'DHCP' and is reachable from the internet
+
+Bonus - provide recommendations on how to remediate the vulnerabilities.
+After research recommendations from AWS document :
+1. Delete rules from a security group
+2. Enable S3 bucket access logging
+3. Add a hardware MFA device for the root user
+4. To reduce the likelihood of a successful brute-force attack, we recommend that you configure your EC2 instance to prevent root account logins over SSH. To disable SSH root account logins, set PermitRootLogin to 'no' in /etc/ssh/sshd_config and restart sshd. When logged in as a non-root user, you can use sudo to escalate privileges when necessary. If you want to allow public key authentication with a command associated with the key, you can set **PermitRootLogin** to 'forced-commands-only'.
+5. You can edit the Security Group to remove access from the internet on port 22
+6. You can edit the Security Group  to remove access from the internet on port 68

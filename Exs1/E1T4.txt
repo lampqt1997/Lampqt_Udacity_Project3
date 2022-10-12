@@ -1,0 +1,7 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+# Poor practice 1
+- IAM Role (InstanceRole) has full access to any s3 bucket instance
+
+# Poor practice 2
+- The WebAppSG security group Security groups allow unrestricted access to ports with high risk [3389, 20, 23, 110, 143, 3306, 8080, 1433, 9200, 9300, 25, 445, 135, 21, 1434, 4333, 5432, 5500, 5601, 22, 3000, 5000, 8088, 8888]

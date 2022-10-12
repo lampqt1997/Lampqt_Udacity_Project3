@@ -1,0 +1,18 @@
+# Describe GuardDuty findings that were detected related to the brute force attack
+
+- Unfortunately, my GuardDuty did not show any findings even though I tried to execute the command to simulate the attack after quite a long time, it took me almost 5 hours of waiting with no results.
+- I take some screenshots for evidence
+
+----------------------------------------------------------------------
+// 12 Oct 2022
+Update after the feedback:
+- My Udacity's account don't have any findings so I used my personal AWS account. I have created 2 instance and let them attack each other via ssh (see My_EC2_Íntance.png file) and got UnauthorizedAccess:EC2/SSHBruteForce - 106.52.186.12 is performing SSH brute force attacks against i-098d6afcdaf419e2d. Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password. Info
+
+
+
+# Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
+
+- Although I don't see any results in Guarduty however I tried to find out and found the explanation on this document:
+https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html
+- It says: To detect unauthorized and unexpected activity in your AWS environment, GuardDuty analyzes and processes data from the sources described in this topic. GuardDuty uses these data sources to detect anomalies involving the following AWS resource types: IAM access keys, EC2 instances, S3 buckets, and Amazon EKS resources. While in transit from these data sources to GuardDuty, all of the log data is encrypted. GuardDuty extracts various fields from these logs for profiling and anomaly detection, and then discards the logs.
+- I think in this Exercise GuardDuty uses the VPC flow log stored in an s3 bucket.
